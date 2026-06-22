@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ============================================================
+     EDIT THESE: page title + your name appear in several places.
+     Search for [EDIT] comments throughout to customize content.
+     ============================================================ -->
+<title>Luke Mason — Networking &amp; AI Student</title>
+<meta name="description" content="Portfolio of Luke Mason, a networking and AI student at Bellevue College.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --fir:#16271F;        /* deepest evergreen (hero bg) */
+    --evergreen:#1E3A2D;  /* surface on dark */
+    --moss:#5C9A6F;       /* primary accent */
+    --moss-deep:#4A7C59;
+    --lichen:#9DB4A3;     /* muted secondary text on dark */
+    --fog:#EDF0EC;        /* light page bg */
+    --mist:#E1E7E1;       /* light surface / dividers */
+    --slate:#56655D;      /* body gray-green on light */
+    --ink:#14201A;        /* primary text on light */
+    --cedar:#C2683D;      /* warm accent, used sparingly */
+
+    --maxw:1080px;
+    --pad:clamp(1.25rem,5vw,3rem);
+    --display:'Space Grotesk',system-ui,sans-serif;
+    --body:'Inter',system-ui,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,monospace;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--body);
+    background:var(--fog);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--moss);color:var(--fir)}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:.78rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--moss-deep);
+    display:inline-flex;align-items:center;gap:.55rem;
+  }
+  .eyebrow::before{content:"";width:1.4rem;height:1px;background:var(--moss-deep)}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    transition:background .3s ease, box-shadow .3s ease;
+  }
+  header.scrolled{
+    background:rgba(237,240,236,.82);
+    backdrop-filter:saturate(140%) blur(10px);
+    box-shadow:0 1px 0 var(--mist);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;padding-top:1.1rem;padding-bottom:1.1rem}
+  .brand{font-family:var(--display);font-weight:700;font-size:1.05rem;letter-spacing:-.01em;display:flex;align-items:center;gap:.55rem;color:var(--fog);transition:color .3s}
+  header.scrolled .brand{color:var(--ink)}
+  .brand .mark{width:.65rem;height:.65rem;background:var(--moss);border-radius:50%;flex:none}
+  .navlinks{display:flex;gap:1.85rem;font-family:var(--mono);font-size:.82rem;letter-spacing:.02em}
+  .navlinks a{color:var(--lichen);transition:color .2s;position:relative;padding-block:.2rem}
+  header.scrolled .navlinks a{color:var(--slate)}
+  .navlinks a:hover,.navlinks a:focus-visible{color:var(--moss)}
+  header.scrolled .navlinks a:hover,header.scrolled .navlinks a:focus-visible{color:var(--moss-deep)}
+  .navtoggle{display:none;background:none;border:0;cursor:pointer;color:var(--fog);font-family:var(--mono);font-size:.85rem}
+  header.scrolled .navtoggle{color:var(--ink)}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:var(--fir);
+    color:var(--fog);
+    min-height:100svh;
+    display:flex;align-items:center;
+    overflow:hidden;
+  }
+  .topo{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+  .topo path{fill:none;stroke:var(--moss);stroke-width:1.1;opacity:.16}
+  .topo .drift{animation:drift 32s ease-in-out infinite alternate}
+  .topo .drift2{animation:drift 40s ease-in-out infinite alternate-reverse}
+  @keyframes drift{from{transform:translate(0,0)}to{transform:translate(2.5%,-2%)}}
+
+  .hero-inner{position:relative;z-index:2;width:100%;padding-top:6rem;padding-bottom:4rem}
+  .hero h1{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(2.8rem,9vw,6.5rem);
+    line-height:.98;
+    letter-spacing:-.03em;
+    margin:1.4rem 0 1.2rem;
+  }
+  .hero h1 .accent{color:var(--moss)}
+  .hero .lede{
+    max-width:46ch;
+    font-size:clamp(1.05rem,2.2vw,1.3rem);
+    color:var(--lichen);
+  }
+  .hero .lede strong{color:var(--fog);font-weight:600}
+  .hero-meta{
+    margin-top:2.6rem;display:flex;flex-wrap:wrap;gap:.6rem 1.4rem;
+    font-family:var(--mono);font-size:.82rem;color:var(--lichen);
+  }
+  .hero-meta span{display:inline-flex;align-items:center;gap:.5rem}
+  .hero-meta .dot{width:.45rem;height:.45rem;border-radius:50%;background:var(--moss)}
+  .hero-cta{margin-top:2.8rem;display:flex;flex-wrap:wrap;gap:.9rem}
+
+  .btn{
+    font-family:var(--mono);font-size:.85rem;letter-spacing:.02em;
+    padding:.8rem 1.4rem;border-radius:2px;border:1px solid transparent;
+    display:inline-flex;align-items:center;gap:.5rem;cursor:pointer;
+    transition:transform .15s ease, background .2s, border-color .2s, color .2s;
+  }
+  .btn-primary{background:var(--moss);color:var(--fir);font-weight:500}
+  .btn-primary:hover,.btn-primary:focus-visible{background:#6fae82;transform:translateY(-2px)}
+  .btn-ghost{border-color:rgba(157,180,163,.4);color:var(--fog)}
+  .btn-ghost:hover,.btn-ghost:focus-visible{border-color:var(--moss);color:var(--moss);transform:translateY(-2px)}
+  .scroll-hint{position:absolute;bottom:1.6rem;left:50%;transform:translateX(-50%);z-index:2;font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--lichen);opacity:.7}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding-top:clamp(4.5rem,9vw,7.5rem);padding-bottom:clamp(4.5rem,9vw,7.5rem)}
+  .section-head{margin-bottom:2.8rem}
+  .section-head h2{
+    font-family:var(--display);font-weight:600;
+    font-size:clamp(1.9rem,4.5vw,2.9rem);
+    letter-spacing:-.02em;margin-top:.8rem;
+  }
+
+  /* About */
+  .about-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(2rem,5vw,4rem)}
+  .about-body p{margin-bottom:1.1rem;color:var(--slate);font-size:1.05rem}
+  .about-body p strong{color:var(--ink);font-weight:600}
+  .panel{
+    border:1px solid var(--mist);border-radius:4px;padding:1.6rem;
+    background:#fff;align-self:start;
+  }
+  .panel h3{font-family:var(--mono);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--moss-deep);margin-bottom:1.1rem}
+  .panel dl{display:grid;grid-template-columns:auto 1fr;gap:.7rem 1rem;font-size:.92rem}
+  .panel dt{font-family:var(--mono);color:var(--slate);font-size:.82rem}
+  .panel dd{color:var(--ink);font-weight:500}
+  .panel .now{display:flex;align-items:center;gap:.5rem}
+  .panel .now::before{content:"";width:.5rem;height:.5rem;border-radius:50%;background:var(--moss);box-shadow:0 0 0 0 var(--moss);animation:pulse 2.4s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(92,154,111,.5)}70%{box-shadow:0 0 0 .5rem rgba(92,154,111,0)}100%{box-shadow:0 0 0 0 rgba(92,154,111,0)}}
+
+  /* Skills */
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2rem}
+  .skill-group h3{font-family:var(--display);font-size:1.05rem;font-weight:600;margin-bottom:1rem;display:flex;align-items:center;gap:.6rem}
+  .skill-group h3 .ix{font-family:var(--mono);font-size:.8rem;color:var(--moss-deep);font-weight:400}
+  .tags{display:flex;flex-wrap:wrap;gap:.5rem}
+  .tag{
+    font-family:var(--mono);font-size:.8rem;color:var(--slate);
+    border:1px solid var(--mist);background:#fff;border-radius:2px;
+    padding:.4rem .7rem;transition:border-color .2s,color .2s,transform .15s;
+  }
+  .tag:hover{border-color:var(--moss);color:var(--moss-deep);transform:translateY(-2px)}
+
+  /* Projects */
+  #work{background:var(--fir);color:var(--fog)}
+  #work .section-head h2{color:var(--fog)}
+  #work .eyebrow{color:var(--moss)}
+  #work .eyebrow::before{background:var(--moss)}
+  .subhead{font-family:var(--mono);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--moss);margin-bottom:1.2rem;display:flex;align-items:center;gap:.6rem}
+  .subhead::after{content:"";flex:1;height:1px;background:rgba(157,180,163,.2)}
+  .projects--single{grid-template-columns:1fr!important}
+  .projects{display:grid;gap:1px;background:rgba(157,180,163,.18);border:1px solid rgba(157,180,163,.18);border-radius:4px;overflow:hidden}
+  .project{background:var(--fir);padding:clamp(1.5rem,3vw,2.2rem);transition:background .25s}
+  .project:hover{background:var(--evergreen)}
+  .project-top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin-bottom:.7rem}
+  .project h3{font-family:var(--display);font-size:1.3rem;font-weight:600;letter-spacing:-.01em}
+  .project .yr{font-family:var(--mono);font-size:.78rem;color:var(--lichen)}
+  .project p{color:var(--lichen);font-size:.96rem;margin-bottom:1.1rem;max-width:60ch}
+  .project .ptags{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.1rem}
+  .project .ptags span{font-family:var(--mono);font-size:.72rem;color:var(--moss);border:1px solid rgba(92,154,111,.3);border-radius:2px;padding:.25rem .55rem}
+  .project .links{display:flex;gap:1.3rem;font-family:var(--mono);font-size:.82rem}
+  .project .links a{color:var(--fog);display:inline-flex;align-items:center;gap:.4rem;transition:color .2s}
+  .project .links a:hover,.project .links a:focus-visible{color:var(--moss)}
+  .project .links a .arr{transition:transform .2s}
+  .project .links a:hover .arr{transform:translate(2px,-2px)}
+  @media(min-width:720px){.projects{grid-template-columns:1fr 1fr}}
+
+  /* Lab library */
+  .labs{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.1rem}
+  .lab{
+    display:flex;flex-direction:column;
+    border:1px solid var(--mist);border-radius:4px;background:#fff;
+    padding:1.5rem;transition:transform .18s ease, border-color .2s, box-shadow .2s;
+  }
+  .lab:hover{transform:translateY(-3px);border-color:var(--moss);box-shadow:0 10px 30px -18px rgba(20,32,26,.35)}
+  .lab .cat{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--moss-deep);margin-bottom:.7rem}
+  .lab h3{font-family:var(--display);font-size:1.18rem;font-weight:600;letter-spacing:-.01em;line-height:1.2;margin-bottom:.55rem}
+  .lab p{color:var(--slate);font-size:.93rem;margin-bottom:1.1rem;flex:1}
+  .lab .ltags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.2rem}
+  .lab .ltags span{font-family:var(--mono);font-size:.7rem;color:var(--slate);background:var(--fog);border-radius:2px;padding:.22rem .5rem}
+  .lab .read{
+    font-family:var(--mono);font-size:.82rem;color:var(--moss-deep);font-weight:500;
+    display:inline-flex;align-items:center;gap:.45rem;align-self:start;
+  }
+  .lab .read .arr{transition:transform .2s}
+  .lab:hover .read .arr{transform:translateX(3px)}
+
+  /* Resume / experience (on dark #work) */
+  .timeline{display:grid;gap:0}
+  .tl-item{display:grid;grid-template-columns:160px 1fr;gap:clamp(1rem,3vw,2.5rem);padding:1.6rem 0;border-top:1px solid rgba(157,180,163,.18)}
+  .tl-item:last-child{border-bottom:1px solid rgba(157,180,163,.18)}
+  .tl-when{font-family:var(--mono);font-size:.85rem;color:var(--lichen)}
+  .tl-role{font-family:var(--display);font-weight:600;font-size:1.15rem;margin-bottom:.15rem;color:var(--fog)}
+  .tl-co{color:var(--moss);font-weight:500;font-size:.95rem;margin-bottom:.6rem}
+  .tl-desc{color:var(--lichen);font-size:.97rem;max-width:62ch}
+
+  /* Contact */
+  #contact{background:var(--mist)}
+  .contact-grid{display:grid;grid-template-columns:1fr auto;gap:2.5rem;align-items:end}
+  .contact-grid h2{font-family:var(--display);font-size:clamp(2rem,6vw,3.6rem);font-weight:600;letter-spacing:-.02em;line-height:1.05}
+  .contact-grid h2 a{color:var(--moss-deep);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px;transition:color .2s}
+  .contact-grid h2 a:hover{color:var(--cedar)}
+  .socials{display:flex;flex-direction:column;gap:.7rem;font-family:var(--mono);font-size:.9rem;text-align:right}
+  .socials a{color:var(--slate);transition:color .2s;white-space:nowrap}
+  .socials a:hover,.socials a:focus-visible{color:var(--moss-deep)}
+
+  footer{padding:2.2rem var(--pad);text-align:center;font-family:var(--mono);font-size:.75rem;color:var(--slate);background:var(--mist);border-top:1px solid #d4dcd4}
+
+  /* reveal animation */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* focus visibility */
+  a:focus-visible,.btn:focus-visible,button:focus-visible,.tag:focus-visible{outline:2px solid var(--moss);outline-offset:3px;border-radius:2px}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:760px){
+    .navlinks{position:fixed;inset:0 0 auto 0;top:0;flex-direction:column;gap:0;background:var(--fir);padding:5rem 2rem 2rem;transform:translateY(-100%);transition:transform .3s ease;height:auto}
+    .navlinks.open{transform:translateY(0)}
+    .navlinks a{padding:1rem 0;border-bottom:1px solid rgba(157,180,163,.15);color:var(--fog);font-size:1rem}
+    header.scrolled .navlinks a{color:var(--fog)}
+    .navtoggle{display:block;z-index:60}
+    .about-grid{grid-template-columns:1fr}
+    .contact-grid{grid-template-columns:1fr;align-items:start}
+    .socials{text-align:left}
+    .tl-item{grid-template-columns:1fr;gap:.4rem}
+  }
+
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;scroll-behavior:auto!important}
+    .reveal{opacity:1;transform:none;transition:none}
+  }
+</style>
+</head>
+<body>
+
+<header id="site-header">
+  <div class="wrap nav">
+    <!-- [EDIT] brand / your initials or name -->
+    <a class="brand" href="#top"><span class="mark"></span>Luke Mason</a>
+    <button class="navtoggle" aria-expanded="false" aria-controls="navlinks">menu</button>
+    <nav class="navlinks" id="navlinks" aria-label="Primary">
+      <a href="#skills">skills</a>
+      <a href="#labs">labs</a>
+      <a href="#work">projects</a>
+      <a href="#contact">contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ======================= HERO ======================= -->
+<main id="top">
+<section class="hero" aria-label="Introduction">
+  <!-- Signature: drifting topographic contour lines (Cascades-inspired) -->
+  <svg class="topo" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g class="drift">
+      <path d="M-50,620 C200,560 350,640 560,580 C780,520 900,600 1250,540"/>
+      <path d="M-50,560 C220,500 360,580 560,520 C770,460 920,540 1250,480"/>
+      <path d="M-50,500 C240,440 380,520 560,460 C760,400 940,480 1250,420"/>
+      <path d="M-50,440 C260,380 400,460 560,400 C750,340 960,420 1250,360"/>
+      <path d="M-50,380 C280,320 420,400 560,340 C740,280 980,360 1250,300"/>
+    </g>
+    <g class="drift2">
+      <path d="M-50,300 C200,250 420,330 600,270 C800,210 1000,290 1250,240"/>
+      <path d="M-50,250 C220,200 440,280 600,220 C790,160 1010,240 1250,190"/>
+      <path d="M-50,200 C240,150 460,230 600,170 C780,110 1020,190 1250,140"/>
+      <path d="M-50,150 C260,100 480,180 600,120 C770,60 1030,140 1250,90"/>
+    </g>
+  </svg>
+
+  <div class="wrap hero-inner reveal">
+    <!-- [EDIT] role tagline -->
+    <span class="eyebrow">Bellevue, WA · Bellevue College</span>
+    <h1>Hi there, I'm <span class="accent">Luke</span></h1>
+    <!-- [EDIT] one-line bio -->
+    <p class="lede"><strong>Networking &amp; AI student</strong> at Bellevue College — two years of coursework across networking, AI, and cybersecurity, plus five years of hands-on field experience setting up computer labs and networks on service trips to Antigua and Barbuda.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#work">View work <span aria-hidden="true">↓</span></a>
+      <!-- [EDIT] résumé PDF lives at the repo root as resume.pdf -->
+      <a class="btn btn-ghost" href="resume.pdf" download>Download résumé <span aria-hidden="true">↓</span></a>
+    </div>
+  </div>
+  <span class="scroll-hint" aria-hidden="true">scroll</span>
+</section>
+
+<!-- ======================= SKILLS ======================= -->
+<section id="skills" aria-labelledby="skills-h">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Skills</span>
+      <h2 id="skills-h">The toolkit.</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group reveal">
+        <h3><span class="ix">01</span> Networking</h3>
+        <div class="tags">
+          <span class="tag">OSPF v2/v3</span><span class="tag">BGP</span><span class="tag">EIGRP</span><span class="tag">IS-IS</span><span class="tag">IPv4 &amp; IPv6</span><span class="tag">VLANs</span><span class="tag">Inter-VLAN routing</span><span class="tag">Multilayer switching</span><span class="tag">Cisco IOS</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h3><span class="ix">02</span> Cybersecurity</h3>
+        <div class="tags">
+          <span class="tag">ARP spoofing / MITM</span><span class="tag">MAC flooding</span><span class="tag">DHCP snooping</span><span class="tag">Port security</span><span class="tag">Dynamic ARP Inspection</span><span class="tag">Kali Linux</span><span class="tag">Wireshark</span><span class="tag">Ettercap</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h3><span class="ix">03</span> Cloud &amp; infrastructure</h3>
+        <div class="tags">
+          <span class="tag">AWS EC2</span><span class="tag">VPC</span><span class="tag">IAM</span><span class="tag">EBS</span><span class="tag">RDS</span><span class="tag">Auto scaling</span><span class="tag">Load balancing</span><span class="tag">Docker</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h3><span class="ix">04</span> AI &amp; programming</h3>
+        <div class="tags">
+          <span class="tag">Local LLMs (Ollama)</span><span class="tag">Open WebUI</span><span class="tag">Python</span><span class="tag">HTML / CSS</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h3><span class="ix">05</span> Systems &amp; tools</h3>
+        <div class="tags">
+          <span class="tag">Linux (Ubuntu · Kali · Mint)</span><span class="tag">Windows 11 admin</span><span class="tag">Virtual machines</span><span class="tag">Packet Tracer</span><span class="tag">PuTTY</span><span class="tag">Git</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= LAB REPORT LIBRARY ======================= -->
+<section id="labs" aria-labelledby="labs-h">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Lab report library</span>
+      <h2 id="labs-h">Written labs &amp; documentation.</h2>
+    </div>
+    <div class="labs">
+      <!-- [EDIT] each card links to a PDF in the /labs folder -->
+      <article class="lab reveal">
+        <span class="cat">Networking</span>
+        <h3>Multi-Area OSPF Configuration</h3>
+        <p>Built a five-router, two-multilayer-switch topology and configured multi-area OSPFv2 and OSPFv3 across IPv4 and IPv6, then verified end-to-end reachability with pings and traceroutes.</p>
+        <div class="ltags"><span>OSPF</span><span>IPv6</span><span>Cisco IOS</span><span>Multilayer switching</span></div>
+        <a class="read" href="labs/multi-area-ospf.pdf" target="_blank" rel="noopener">Read report (PDF) <span class="arr" aria-hidden="true">→</span></a>
+      </article>
+
+      <article class="lab reveal">
+        <span class="cat">Networking</span>
+        <h3>BGP Configuration with IS-IS &amp; EIGRP</h3>
+        <p>Connected three autonomous systems running OSPF, EIGRP, and IS-IS over external BGP, handling IPv4/IPv6 address families and route redistribution to ping across the full topology.</p>
+        <div class="ltags"><span>BGP</span><span>IS-IS</span><span>EIGRP</span><span>Redistribution</span></div>
+        <a class="read" href="labs/bgp-configuration.pdf" target="_blank" rel="noopener">Read report (PDF) <span class="arr" aria-hidden="true">→</span></a>
+      </article>
+
+      <article class="lab reveal">
+        <span class="cat">Cybersecurity</span>
+        <h3>Layer 2 Switch Attacks &amp; Mitigation</h3>
+        <p>Performed ARP spoofing, MAC flooding, and DHCP starvation attacks using Kali Linux, Ettercap, and Wireshark — then mitigated them with port security, DHCP snooping, and Dynamic ARP Inspection.</p>
+        <div class="ltags"><span>Kali Linux</span><span>Wireshark</span><span>Port security</span><span>MITM</span></div>
+        <a class="read" href="labs/layer-2-switch-attacks.pdf" target="_blank" rel="noopener">Read report (PDF) <span class="arr" aria-hidden="true">→</span></a>
+      </article>
+
+      <article class="lab reveal">
+        <span class="cat">Cloud</span>
+        <h3>AWS: EC2, VPC &amp; IAM</h3>
+        <p>Hands-on with three core AWS services — launching EC2 instances, building an isolated VPC with public subnets, and configuring IAM users, groups, and permission policies.</p>
+        <div class="ltags"><span>AWS</span><span>EC2</span><span>VPC</span><span>IAM</span></div>
+        <a class="read" href="labs/aws-labs-1-3.pdf" target="_blank" rel="noopener">Read report (PDF) <span class="arr" aria-hidden="true">→</span></a>
+      </article>
+
+      <article class="lab reveal">
+        <span class="cat">Cloud</span>
+        <h3>AWS: EBS, RDS &amp; Auto Scaling</h3>
+        <p>Attached and mounted EBS volumes from the Linux CLI, took snapshots, stood up a managed RDS database, and configured elastic load balancing with auto scaling for EC2.</p>
+        <div class="ltags"><span>EBS</span><span>RDS</span><span>Auto scaling</span><span>Linux CLI</span></div>
+        <a class="read" href="labs/aws-labs-4-6.pdf" target="_blank" rel="noopener">Read report (PDF) <span class="arr" aria-hidden="true">→</span></a>
+      </article>
+
+      <article class="lab reveal">
+        <span class="cat">AI</span>
+        <h3>Local AI with a Custom Web UI</h3>
+        <p>Ran an open-source LLM locally with Ollama, then built a network-accessible interface two ways — Open WebUI inside a Docker container, and a custom Python web UI.</p>
+        <div class="ltags"><span>Ollama</span><span>Docker</span><span>Python</span><span>Open WebUI</span></div>
+        <a class="read" href="labs/local-ai-web-ui.pdf" target="_blank" rel="noopener">Read report (PDF) <span class="arr" aria-hidden="true">→</span></a>
+      </article>
+
+      <article class="lab reveal">
+        <span class="cat">Systems</span>
+        <h3>Windows 11 Install &amp; Setup</h3>
+        <p>Deployed Windows 11 from a Rufus-built bootable USB, partitioned the drive, installed drivers, and set up the toolchain — PuTTY, Packet Tracer, Wireshark, and Office 365.</p>
+        <div class="ltags"><span>Windows 11</span><span>Rufus</span><span>Drivers</span><span>Deployment</span></div>
+        <a class="read" href="labs/windows-11-setup.pdf" target="_blank" rel="noopener">Read report (PDF) <span class="arr" aria-hidden="true">→</span></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PROJECTS ======================= -->
+<!-- ======================= PROJECTS & EXPERIENCE ======================= -->
+<section id="work" aria-labelledby="work-h">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Portfolio</span>
+      <h2 id="work-h">Projects &amp; Experience</h2>
+    </div>
+
+    <h3 class="subhead reveal">Projects</h3>
+    <div class="projects projects--single">
+      <!-- [EDIT] duplicate a .project block to add more projects later -->
+      <article class="project reveal">
+        <div class="project-top"><h3>This Portfolio Site</h3><span class="yr">2026</span></div>
+        <p>The site you're looking at — a custom, hand-built personal portfolio with a Pacific Northwest theme. Single-page, fully responsive, and built from scratch without a framework.</p>
+        <div class="ptags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+        <div class="links">
+          <a href="#">Source <span class="arr" aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+    </div>
+
+    <h3 class="subhead reveal" style="margin-top:clamp(2.8rem,5vw,4rem)">Experience</h3>
+    <div class="timeline">
+      <!-- [EDIT] your roles -->
+      <div class="tl-item reveal">
+        <div class="tl-when">Feb 2020 — 2026</div>
+        <div>
+          <div class="tl-role">Service Trip — Antigua &amp; Barbuda</div>
+          <div class="tl-co">Student team lead</div>
+          <p class="tl-desc">Led a team of students in Antigua and Barbuda to set up computer labs and networks for schools, universities, and hospitals.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-when">2024 — 2026</div>
+        <div>
+          <div class="tl-role">Cisco Project Club</div>
+          <div class="tl-co">Newport High School</div>
+          <p class="tl-desc">Fixed, wiped, imaged, and tested devices such as laptops to prepare them for donation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= CONTACT ======================= -->
+<section id="contact" aria-labelledby="contact-h">
+  <div class="wrap">
+    <div class="section-head reveal" style="margin-bottom:1.6rem">
+      <span class="eyebrow">Contact</span>
+    </div>
+    <div class="contact-grid reveal">
+      <!-- [EDIT] your email -->
+      <h2 id="contact-h">Let's build something.<br><a href="mailto:luke.mason26@hotmail.com">luke.mason26@hotmail.com</a></h2>
+      <div class="socials">
+        <a href="https://github.com/lukemason26" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <!-- [EDIT] -->
+  © <span id="yr"></span> Luke Mason · Bellevue, WA
+</footer>
+
+<script>
+  // year
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // sticky nav background on scroll
+  const header = document.getElementById('site-header');
+  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 40);
+  onScroll();
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  // mobile nav
+  const toggle = document.querySelector('.navtoggle');
+  const links = document.getElementById('navlinks');
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.textContent = open ? 'close' : 'menu';
+  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    links.classList.remove('open');
+    toggle.setAttribute('aria-expanded','false');
+    toggle.textContent = 'menu';
+  }));
+
+  // scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
